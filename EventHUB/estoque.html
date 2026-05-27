@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestão de Estoque | EventHUB</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<link rel="icon" type="image/png" href="./assets/favicon.png">
+
+<body>
+  <header class="app-header">
+    <div class="brand-area">
+      <img src="./assets/logoeventhub.png" alt="Logo EventHUB" class="app-logo" />
+      <div>
+        <span class="page-pill">Gestão de Estoque</span>
+        <h1>Movimentações de estoque</h1>
+        <p>Controle entradas e saídas manuais, além do histórico automático das locações.</p>
+      </div>
+    </div>
+
+    <details class="menu-dropdown">
+      <summary>Menu</summary>
+      <div class="menu-panel">
+        <a class="" href="./home.html">Painel</a><a class="" href="./itens.html">Itens</a><a class="active"
+          href="./estoque.html">Estoque</a><a class="" href="./locacoes.html">Locações</a>
+      </div>
+    </details>
+
+    <div class="header-actions">
+      <span id="nome-usuario" class="user-chip">Usuário</span>
+      <button id="btn-logout" class="btn btn-secondary">Sair</button>
+    </div>
+  </header>
+
+  <main class="page-wrap two-sections">
+    <section class="panel-card">
+      <div class="section-head">
+        <h2>Registrar movimentação</h2>
+        <p>Use esta área apenas para entrada e saída manual de estoque.</p>
+      </div>
+
+      <form id="movimentacao-form" class="form-grid">
+        <div class="span-3">
+          <label for="id_item_mov">Item</label>
+          <select id="id_item_mov" required></select>
+        </div>
+
+        <div>
+          <label for="tipo">Tipo</label>
+          <select id="tipo" required>
+            <option value="">Selecione</option>
+            <option value="entrada">Entrada</option>
+            <option value="saida">Saída</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="quantidade_mov">Quantidade</label>
+          <input id="quantidade_mov" type="number" min="1" required />
+        </div>
+
+        <div>
+          <label for="data_movimentacao">Data</label>
+          <input id="data_movimentacao" type="date" required />
+        </div>
+
+        <div>
+          <label for="responsavel">Responsável</label>
+          <input id="responsavel" type="text" placeholder="Nome da pessoa responsável" />
+        </div>
+
+        <div class="span-2">
+          <label for="observacao">Observação</label>
+          <input id="observacao" type="text" placeholder="Ex.: Retirada para casamento" />
+        </div>
+
+        <div class="span-3 actions-row">
+          <button type="submit" class="btn btn-primary">Registrar movimentação</button>
+        </div>
+
+        <p id="mensagem-mov" class="message span-3"></p>
+      </form>
+    </section>
+
+
+    <section class="stock-summary-grid full-section">
+      <article class="summary-card summary-entry">
+        <span>Entradas</span>
+        <strong id="total-entradas">0</strong>
+        <small>Total registrado em movimentações de entrada.</small>
+      </article>
+      <article class="summary-card summary-exit">
+        <span>Saídas / Retiradas</span>
+        <strong id="total-saidas">0</strong>
+        <small>Total de saídas manuais e retiradas por locação.</small>
+      </article>
+      <article class="summary-card summary-normal">
+        <span>Estoque normal</span>
+        <strong id="total-normal">0</strong>
+        <small>Itens com quantidade acima ou igual ao mínimo.</small>
+      </article>
+      <article class="summary-card summary-minimum">
+        <span>Estoque mínimo</span>
+        <strong id="total-minimo-estoque">0</strong>
+        <small>Itens que precisam de atenção.</small>
+      </article>
+    </section>
+
+    <section class="panel-card">
+      <div class="section-head">
+        <h2>Itens em ordem alfabética</h2>
+        <p>Ordenação implementada com algoritmo Bubble Sort.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Categoria</th>
+              <th>Total</th>
+              <th>Disponível</th>
+              <th>Mínimo</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="estoque-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel-card full-section">
+      <div class="section-head">
+        <h2>Histórico de movimentações</h2>
+        <p>Visualize o registro das entradas, saídas, retiradas e devoluções.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Item</th>
+              <th>Tipo</th>
+              <th>Quantidade</th>
+              <th>Disponível</th>
+              <th>Mínimo</th>
+              <th>Responsável</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody id="historico-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/supabaseClient.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/estoque.js"></script>
+</body>
+
+</html>

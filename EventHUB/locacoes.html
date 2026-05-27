@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Locações | EventHUB</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<link rel="icon" type="image/png" href="./assets/favicon.png">
+
+<body>
+  <header class="app-header">
+    <div class="brand-area">
+      <img src="./assets/logoeventhub.png" alt="Logo EventHUB" class="app-logo" />
+      <div>
+        <span class="page-pill">Locações</span>
+        <h1>Controle de locações</h1>
+        <p>Organize clientes, eventos, retiradas e devoluções.</p>
+      </div>
+    </div>
+
+    <details class="menu-dropdown">
+      <summary>Menu</summary>
+      <div class="menu-panel">
+        <a class="" href="./home.html">Painel</a><a class="" href="./itens.html">Itens</a><a class=""
+          href="./estoque.html">Estoque</a><a class="active" href="./locacoes.html">Locações</a>
+      </div>
+    </details>
+
+    <div class="header-actions">
+      <span id="nome-usuario" class="user-chip">Usuário</span>
+      <button id="btn-logout" class="btn btn-secondary">Sair</button>
+    </div>
+  </header>
+
+  <main class="page-wrap two-sections">
+
+    <section class="panel-card client-summary-card">
+      <div class="section-head section-head-inline">
+        <div>
+          <h2>Cliente logado</h2>
+          <p>A locação será vinculada automaticamente ao usuário que entrou no sistema.</p>
+        </div>
+      </div>
+
+      <div class="logged-client-box">
+        <div>
+          <span class="muted-label">Nome</span>
+          <strong id="cliente-logado-nome">Carregando...</strong>
+        </div>
+        <div>
+          <span class="muted-label">E-mail</span>
+          <strong id="cliente-logado-email">Carregando...</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-card">
+      <div class="section-head">
+        <h2 id="locacao-title">Nova locação</h2>
+        <p>Preencha os dados da locação e selecione um item com quantidade.</p>
+      </div>
+
+      <form id="locacao-form" class="form-grid">
+        <input type="hidden" id="id_locacao" />
+
+        <input type="hidden" id="id_cliente" />
+
+        <div>
+          <label>Cliente</label>
+          <input id="cliente_locacao_nome" type="text" readonly placeholder="Cliente logado" />
+        </div>
+
+        <div>
+          <label for="data_retirada">Data de retirada</label>
+          <input id="data_retirada" type="date" required />
+        </div>
+
+        <div>
+          <label for="data_prevista_devolucao">Data prevista de devolução</label>
+          <input id="data_prevista_devolucao" type="date" required />
+        </div>
+
+        <div>
+          <label for="status">Status</label>
+          <select id="status" required>
+            <option value="Agendada">Agendada</option>
+            <option value="Retirada">Retirada</option>
+            <option value="Finalizada">Finalizada</option>
+            <option value="Cancelada">Cancelada</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="item_locacao">Item</label>
+          <select id="item_locacao" required></select>
+        </div>
+
+        <div>
+          <label for="quantidade_locacao">Quantidade</label>
+          <input id="quantidade_locacao" type="number" min="1" required />
+        </div>
+
+        <div class="span-3">
+          <label for="observacoes">Observações</label>
+          <input id="observacoes" type="text" placeholder="Ex.: Casamento no sábado à noite" />
+        </div>
+
+        <div class="span-3 actions-row">
+          <button type="submit" class="btn btn-primary">Salvar locação</button>
+          <button type="button" id="cancelar-locacao" class="btn btn-secondary">Cancelar</button>
+        </div>
+
+        <p id="mensagem-locacao" class="message span-3"></p>
+      </form>
+    </section>
+
+    <section class="panel-card">
+      <div class="section-head">
+        <h2>Locações cadastradas</h2>
+        <p>Consulte as locações e acompanhe o status dos eventos.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Item</th>
+              <th>Qtd.</th>
+              <th>Disponível</th>
+              <th>Mínimo</th>
+              <th>Estoque</th>
+              <th>Retirada</th>
+              <th>Devolução</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="locacoes-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/supabaseClient.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/locacoes.js"></script>
+</body>
+
+</html>
