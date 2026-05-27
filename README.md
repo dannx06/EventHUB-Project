@@ -77,8 +77,7 @@ EventHUB/
 │   ├── login.js
 │   └── supabaseClient.js
 │
-├── sql/
-│   └── eventhub_sql_limpo_novos_usuarios.sql
+├── ── EventHUB.sql
 │
 ├── assets/
 │   └── imagens e logo do sistema
@@ -132,7 +131,7 @@ SQL Editor
 Execute o arquivo:
 
 ```plaintext
-sql/eventhub_sql_limpo_novos_usuarios.sql
+EventHUB.sql
 ```
 
 ---
@@ -149,7 +148,7 @@ Adicione:
 
 ```javascript
 const SUPABASE_URL = 'SUA_URL';
-const SUPABASE_ANON_KEY = 'SUA_ANON_KEY';
+const SUPABASE_KEY = 'SUA_ANON_KEY';
 ```
 
 ---
